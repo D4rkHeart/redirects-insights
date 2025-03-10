@@ -1,11 +1,17 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt ./
+RUN apt-get update && apt-get install -y \
+    openssh-client \
+    socat \
+    && rm -rf /var/lib/apt/lists/*
 
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY scripts/ ./scripts/
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
-CMD ["python", "./scripts/fetch_and_analyze.py"]
+ENTRYPOINT ["./entrypoint.sh"]

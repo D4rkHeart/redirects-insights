@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  analyzer:
+    build: .
+    volumes:
+      - ./data:/data
+      - $SSH_AUTH_SOCK:/ssh-agent
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    env_file:
+      - .env
