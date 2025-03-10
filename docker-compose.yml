@@ -4,8 +4,5 @@ services:
     build: .
     volumes:
       - ./data:/data
-      - $SSH_AUTH_SOCK:/ssh-agent
-    environment:
-      - SSH_AUTH_SOCK=/ssh-agent
     env_file:
       - .env
