@@ -10,5 +10,6 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY scripts/ ./scripts/
+RUN chmod +x /app/scripts/init_ssh.sh
 
-CMD ["python", "./scripts/analyze_redirects.py"]
+CMD ["/bin/bash", "-c", "/app/scripts/init_ssh.sh && python /app/scripts/analyze_redirects.py"]
